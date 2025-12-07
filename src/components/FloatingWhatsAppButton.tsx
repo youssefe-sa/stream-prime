@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 export const FloatingWhatsAppButton = () => {
   return (
-    <div className="fixed bottom-24 right-6 z-50">
+    <div className="fixed bottom-24 right-6 z-50 hidden">
       <a 
         href="https://wa.me/12106343468" 
         target="_blank" 

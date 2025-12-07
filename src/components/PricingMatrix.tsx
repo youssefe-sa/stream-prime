@@ -9,7 +9,7 @@ interface PricingMatrixProps {
 
 export const PricingMatrix = ({ onSelectPlan }: PricingMatrixProps) => {
   const [selectedDuration, setSelectedDuration] = useState("12months");
-  const [selectedDevices, setSelectedDevices] = useState(2);
+  const [selectedDevices, setSelectedDevices] = useState(1);
   const [showPricingTable, setShowPricingTable] = useState(false);
 
   const currentPlan = pricingPlans.find((p) => p.duration === selectedDuration);
