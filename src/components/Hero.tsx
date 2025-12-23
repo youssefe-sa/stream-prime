@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Play, Zap, Globe, Tv, ChevronLeft, ChevronRight } from "lucide-react";
+import { Play, Check, ArrowRight, Tv, Globe, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import contentSports from "@/assets/content-sports.jpg";
 import contentMovies from "@/assets/content-movies.jpg";
@@ -8,7 +8,6 @@ import contentKids from "@/assets/content-kids.jpg";
 
 interface HeroProps {
   onOpenPricing: () => void;
-  onOpenTrial: () => void;
 }
 
 const carouselSlides = [
@@ -62,7 +61,7 @@ const carouselSlides = [
   },
 ];
 
-export const Hero = ({ onOpenPricing, onOpenTrial }: HeroProps) => {
+export const Hero = ({ onOpenPricing }: HeroProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -147,18 +146,20 @@ export const Hero = ({ onOpenPricing, onOpenTrial }: HeroProps) => {
 
             {/* Subheading */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-10 animate-fade-up delay-200">
-              Access 18,000+ live channels, 50,000+ movies & series, PPV events and On Demand content in stunning HD & 4K quality.
+              Access 30,000+ live channels, 50,000+ movies & series, PPV events and On Demand content in stunning HD & 4K quality.
               Compatible with all your devices.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 animate-fade-up delay-300">
               <Button 
-                onClick={onOpenTrial}
+                asChild
                 className="btn-primary text-lg px-10 py-6 group"
               >
-                <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Try 24h Trial — $2
+                <a href="/channels">
+                  <Tv className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Browse Channels
+                </a>
               </Button>
               <Button 
                 onClick={onOpenPricing}

@@ -11,8 +11,8 @@ const categories = [
   {
     id: "live",
     title: "Live Channels",
-    description: "18,000+ live TV channels worldwide",
-    channels: "18,000+",
+    description: "30,000+ live TV channels worldwide",
+    channels: "30,000+",
     image: contentLive,
     gradient: "from-cyan-600/80 to-transparent",
   },

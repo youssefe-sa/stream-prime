@@ -10,6 +10,7 @@ import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { trialPlan } from "@/data/pricing";
 import { Helmet } from "react-helmet-async";
+import ChannelSearch from "@/components/ChannelSearch";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -47,10 +48,10 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>StreamMax - Premium IPTV Service | 18,000+ Live Channels</title>
+        <title>StreamMax - Premium IPTV Service | 30,000+ Live Channels</title>
         <meta 
           name="description" 
-          content="Stream 18,000+ live TV channels and 50,000+ movies in HD & 4K quality. Compatible with all devices. Start your 24-hour trial for just $2." 
+          content="Stream 30,000+ live TV channels and 50,000+ movies in HD & 4K quality. Compatible with all devices. Start your 24-hour trial for just $2." 
         />
         <meta name="keywords" content="IPTV, streaming, live TV, channels, HD, 4K, movies, sports, entertainment" />
         <link rel="canonical" href="https://streammax.tv" />
@@ -59,7 +60,7 @@ const Index = () => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "StreamMax",
-            "description": "Premium IPTV streaming service with 18,000+ live channels",
+            "description": "Premium IPTV streaming service with 30,000+ live channels",
             "url": "https://streammax.tv",
             "potentialAction": {
               "@type": "SearchAction",
@@ -70,12 +71,13 @@ const Index = () => {
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen flex flex-col bg-background">
         <Header />
         
         <main>
-          <Hero onOpenPricing={handleOpenPricing} onOpenTrial={handleOpenTrial} />
+          <Hero onOpenPricing={handleOpenPricing} />
           <Features />
+          <ChannelSearch />
           <ContentShowcase />
           <Comparison />
           <PricingMatrix onSelectPlan={handleSelectPlan} />

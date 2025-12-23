@@ -29,18 +29,20 @@ export const CTA = ({ onOpenPricing, onOpenTrial }: CTAProps) => {
 
           {/* Description */}
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            Join thousands of satisfied customers and enjoy 18,000+ live channels, 
+            Join thousands of satisfied customers and enjoy 30,000+ live channels, 
             movies and series in HD & 4K quality on all your devices.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Button 
-              onClick={onOpenTrial}
+              asChild
               className="btn-primary text-lg px-8 py-6 group"
             >
-              24h Trial - Only $2
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <a href="/channels">
+                Browse Channels
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
             <Button 
               onClick={onOpenPricing}

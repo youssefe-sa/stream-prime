@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Sparkles } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,7 @@ const Pricing = () => {
   };
 
   const features = [
-    { icon: Tv, text: "18,000+ Live Channels" },
+    { icon: Tv, text: "30,000+ Live Channels" },
     { icon: Star, text: "150,000+ VOD Content" },
     { icon: Shield, text: "Anti-Freeze Technology" },
     { icon: Clock, text: "24/7 Support" },
@@ -52,7 +53,7 @@ const Pricing = () => {
     <>
       <Helmet>
         <title>Pricing Plans | StreamMax IPTV</title>
-        <meta name="description" content="Choose from our flexible IPTV subscription plans. Starting from $7.50/month with access to 18,000+ channels and 150,000+ VOD content." />
+        <meta name="description" content="Choose from our flexible IPTV subscription plans. Starting from $7.50/month with access to 30,000+ channels and 150,000+ VOD content." />
       </Helmet>
 
       <Header />
@@ -174,7 +175,7 @@ const Pricing = () => {
                 {/* Features List */}
                 <div className="grid md:grid-cols-2 gap-4 mb-8">
                   {[
-                    "18,000+ Live TV Channels",
+                    "30,000+ Live TV Channels",
                     "150,000+ Movies & Series",
                     "All Sports Channels & PPV",
                     "4K/FHD/HD Quality",
@@ -218,18 +219,18 @@ const Pricing = () => {
 
             {/* Trial Option */}
             <div className="max-w-2xl mx-auto mt-8">
-              <div className="glass-card p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <div>
-                  <h4 className="text-lg font-semibold text-foreground">Not sure yet?</h4>
-                  <p className="text-muted-foreground">Try our 24-hour trial for just ${trialPlan.price}</p>
+              <div className="glass-card p-6 text-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground mb-1">Need help choosing?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Contact our support team for personalized assistance with your subscription.
+                    </p>
+                  </div>
                 </div>
-                <Button
-                  variant="outline"
-                  onClick={() => handleSelectPlan(trialPlan.planId, trialPlan.price, "24 Hour Trial", 1)}
-                  className="whitespace-nowrap"
-                >
-                  Start Trial - ${trialPlan.price}
-                </Button>
               </div>
             </div>
           </div>

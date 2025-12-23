@@ -164,7 +164,7 @@ const CheckoutPage = () => {
   };
 
   const features = [
-    { icon: Tv, text: "18,000+ Live Channels" },
+    { icon: Tv, text: "30,000+ Live Channels" },
     { icon: Star, text: "150,000+ VOD Content" },
     { icon: Shield, text: "Anti-Freeze Technology" },
     { icon: Clock, text: "24/7 Support" },

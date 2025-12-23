@@ -13,7 +13,7 @@ const features = [
   },
   {
     icon: Globe,
-    title: "18,000+ Channels",
+    title: "30,000+ Channels",
     description: "Access live TV from 100+ countries including sports, news, movies, and entertainment.",
   },
   {

@@ -21,7 +21,7 @@ export const faqItems: FAQItem[] = [
   {
     id: "3",
     question: "How many channels do you offer?",
-    answer: "We offer over 18,000+ live channels from 100+ countries worldwide, including sports, news, movies, entertainment, kids programming, and more. Plus access to 50,000+ movies and TV series on-demand.",
+    answer: "We offer over 30,000+ live channels from 100+ countries worldwide, including sports, news, movies, entertainment, kids programming, and more. Plus access to 50,000+ movies and TV series on-demand.",
     category: "Content",
   },
   {

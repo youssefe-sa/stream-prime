@@ -30,9 +30,6 @@ export const PricingMatrix = ({ onSelectPlan }: PricingMatrixProps) => {
     }
   };
 
-  const handleTrialCheckout = () => {
-    onSelectPlan(trialPlan.planId, trialPlan.price, "24 Hour Trial", 1);
-  };
 
   return (
     <section id="pricing" className="py-24 bg-background">
@@ -45,7 +42,7 @@ export const PricingMatrix = ({ onSelectPlan }: PricingMatrixProps) => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Choose Your Plan
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto whitespace-nowrap">
             Select your subscription duration and number of devices. Longer plans = bigger savings.
           </p>
         </div>
@@ -116,29 +113,21 @@ export const PricingMatrix = ({ onSelectPlan }: PricingMatrixProps) => {
               </div>
             </div>
 
-            {/* Trial Option */}
-            <div 
-              onClick={handleTrialCheckout}
-              className="glass-card p-5 cursor-pointer group hover:border-primary/50 transition-all"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">24 Hour Trial</h3>
-                    <p className="text-sm text-muted-foreground">Test before you commit</p>
-                  </div>
+            {/* Instructions */}
+            <div className="glass-card p-6 text-center">
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Check className="w-5 h-5 text-primary" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl font-bold text-primary">$2</span>
-                  <Button size="sm" className="btn-primary group-hover:scale-105 transition-transform">
-                    Try Now
-                  </Button>
+                <div>
+                  <h3 className="font-medium text-foreground mb-1">How to choose your plan?</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Select duration and number of devices to see your subscription price.
+                  </p>
                 </div>
               </div>
             </div>
+
           </div>
 
           {/* Right Column - Summary Card */}
@@ -174,7 +163,7 @@ export const PricingMatrix = ({ onSelectPlan }: PricingMatrixProps) => {
 
                   <ul className="space-y-2 mb-6 w-full text-left">
                     {[
-                      "18,000+ Live Channels",
+                      "30,000+ Live Channels",
                       "50,000+ VOD Content",
                       "HD & 4K Quality",
                       "EPG TV Guide",

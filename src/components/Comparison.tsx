@@ -9,7 +9,7 @@ interface ComparisonRow {
 
 const comparisonData: ComparisonRow[] = [
   { feature: "Monthly Price", streammax: "From $7.50", cable: "$100-200+", others: "$50-100+" },
-  { feature: "Live TV Channels", streammax: "18,000+", cable: "200-500", others: "100-300" },
+  { feature: "Live TV Channels", streammax: "30,000+", cable: "200-500", others: "100-300" },
   { feature: "4K Ultra HD", streammax: true, cable: false, others: "Limited" },
   { feature: "No Contract", streammax: true, cable: false, others: true },
   { feature: "Multi-Device Support", streammax: "Up to 5", cable: "1-2", others: "1-4" },

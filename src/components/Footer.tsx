@@ -12,7 +12,7 @@ export const Footer = () => {
               <span className="text-xl font-bold text-foreground">StreamMax</span>
             </a>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs">
-              Premium IPTV service with 18,000+ channels worldwide. Stream your favorite content in HD & 4K quality.
+              Premium IPTV service with 30,000+ channels worldwide. Stream your favorite content in HD & 4K quality.
             </p>
             
           </div>
