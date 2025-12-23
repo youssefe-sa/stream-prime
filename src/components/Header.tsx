@@ -98,7 +98,7 @@ export const Header = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-2 text-foreground" 
+          className="md:hidden p-2 text-foreground flex items-center justify-center w-10 h-10"
           onClick={(e) => {
             e.preventDefault();
             setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -107,9 +107,14 @@ export const Header = () => {
               window.scrollTo(0, 0);
             }
           }} 
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={isMobileMenuOpen}
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
         </button>
       </nav>
 
