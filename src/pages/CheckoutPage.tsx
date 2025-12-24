@@ -28,6 +28,11 @@ const CheckoutPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   // Get plan details from location state or use default values
   const planDetails: PlanDetails = (location.state as { planDetails?: PlanDetails })?.planDetails || {
     planId: "12months-1",

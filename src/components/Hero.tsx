@@ -97,7 +97,7 @@ export const Hero = ({ onOpenPricing }: HeroProps) => {
   const slide = carouselSlides[currentSlide];
 
   const stats = [
-    { icon: Tv, value: "18K+", label: "Live Channels" },
+    { icon: Tv, value: "30K+", label: "Live Channels" },
     { icon: Globe, value: "100+", label: "Countries" },
     { icon: Zap, value: "99.9%", label: "Uptime" },
   ];

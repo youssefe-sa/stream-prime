@@ -1,5 +1,5 @@
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import contentSports from "@/assets/content-sports.jpg";
 import contentMovies from "@/assets/content-movies.jpg";
 import contentNews from "@/assets/content-news.jpg";
@@ -167,7 +167,7 @@ export const ContentShowcase = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const getCurrentSlideItems = () => {
+  const getCurrentSlideItems = useCallback(() => {
     if (isMobile) {
       // Mobile: return 2 items for the carousel
       const items = [];
@@ -185,9 +185,9 @@ export const ContentShowcase = () => {
       }
       return items;
     }
-  };
+  }, [isMobile, currentIndex]);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     if (isMobile) {
       // Mobile: decrement by 2
       setCurrentIndex(currentIndex === 0 || currentIndex === 1 ? 
@@ -196,9 +196,9 @@ export const ContentShowcase = () => {
       // Desktop: decrement by 1
       setCurrentIndex(currentIndex === 0 ? popularContent.length - 1 : currentIndex - 1);
     }
-  };
+  }, [isMobile, currentIndex]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (isMobile) {
       // Mobile: increment by 2
       setCurrentIndex((currentIndex + 2) % popularContent.length);
@@ -206,7 +206,7 @@ export const ContentShowcase = () => {
       // Desktop: increment by 1
       setCurrentIndex((currentIndex + 1) % popularContent.length);
     }
-  };
+  }, [isMobile, currentIndex]);
 
   return (
     <section className="py-24 bg-background">
