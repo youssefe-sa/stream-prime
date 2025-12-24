@@ -156,38 +156,45 @@ export const ContentShowcase = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const getCurrentSlideItems = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      // Mobile: return 2 items for the carousel
+      const items = [];
+      for (let i = 0; i < 2; i++) {
+        const index = (currentIndex + i) % popularContent.length;
+        items.push(popularContent[index]);
+      }
+      return items;
+    } else {
+      // Desktop: return 6 items for the carousel
+      const items = [];
+      for (let i = 0; i < 6; i++) {
+        const index = (currentIndex + i) % popularContent.length;
+        items.push(popularContent[index]);
+      }
+      return items;
+    }
+  };
+
   const goToPrevious = () => {
-    setCurrentIndex(currentIndex === 0 ? popularContent.length - 1 : currentIndex - 1);
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      // Mobile: decrement by 2
+      setCurrentIndex(currentIndex === 0 || currentIndex === 1 ? 
+        popularContent.length - (2 - currentIndex) : currentIndex - 2);
+    } else {
+      // Desktop: decrement by 1
+      setCurrentIndex(currentIndex === 0 ? popularContent.length - 1 : currentIndex - 1);
+    }
   };
 
   const goToNext = () => {
-    setCurrentIndex(currentIndex === popularContent.length - 1 ? 0 : currentIndex + 1);
-  };
-
-  const getCurrentSlideItems = () => {
-    const isMobile = window.innerWidth < 768;
-    const itemsPerSlide = isMobile ? 3 : 6;
-    const items = [];
-    for (let i = 0; i < itemsPerSlide; i++) {
-      const index = (currentIndex + i) % popularContent.length;
-      items.push(popularContent[index]);
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      // Mobile: increment by 2
+      setCurrentIndex((currentIndex + 2) % popularContent.length);
+    } else {
+      // Desktop: increment by 1
+      setCurrentIndex((currentIndex + 1) % popularContent.length);
     }
-    return items;
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      // Force re-render on window resize
-      setCurrentIndex(0);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const getTransformPercentage = () => {
-    const isMobile = window.innerWidth < 768;
-    return isMobile ? (currentIndex * 33.33) : (currentIndex * 16.66);
   };
 
   return (
@@ -242,7 +249,8 @@ export const ContentShowcase = () => {
           ))}
         </div>
 
-        {/* Popular Right Now - Carousel */}
+        {/* Featured Content Row */}
+        {/* Popular Right Now in USA - Carousel */}
         <div className="mt-16">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-semibold text-foreground">
@@ -269,16 +277,16 @@ export const ContentShowcase = () => {
           <div className="relative overflow-hidden rounded-xl">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${getTransformPercentage()}%)` }}
+              style={{ transform: `translateX(-${currentIndex * (window.innerWidth < 768 ? 50 : 16.66)}%)` }}
             >
               {popularContent.map((content, index) => (
                 <div key={index} className="w-full flex-shrink-0">
                   <div className="px-4 md:px-0">
-                    <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                       {getCurrentSlideItems().map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="group glass-card p-4 hover:border-primary/30 transition-all cursor-pointer flex-shrink-0 w-40 md:w-auto"
+                          className="group glass-card p-4 hover:border-primary/30 transition-all cursor-pointer"
                         >
                           <div className="aspect-[2/3] rounded-lg bg-muted mb-3 overflow-hidden relative">
                             <img 
