@@ -28,19 +28,42 @@ const CrispChat = () => {
     const style = document.createElement('style');
     style.textContent = `
       @media (max-width: 768px) {
-        .crisp-client {
-          right: 20px !important;
-          bottom: 20px !important;
-          left: auto !important;
-        }
-        
+        /* Cible spécifiquement le bouton de chat Crisp */
         .crisp-client .cc-1qbp0 {
-          margin-right: 0 !important;
+          position: fixed !important;
+          right: 16px !important;
+          bottom: 16px !important;
+          left: auto !important;
+          margin: 0 !important;
+          transform: none !important;
+          z-index: 999 !important;
         }
         
-        /* Empêche le débordement horizontal */
-        body {
+        /* Cible le conteneur principal du chat */
+        .crisp-client {
+          position: fixed !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          left: auto !important;
+          width: auto !important;
+          max-width: 100vw !important;
+        }
+        
+        /* Empêche tout débordement */
+        html, body {
           overflow-x: hidden !important;
+          max-width: 100vw !important;
+        }
+        
+        /* Conteneur principal de l'application */
+        #root, .App {
+          overflow-x: hidden !important;
+          max-width: 100vw !important;
+        }
+        
+        /* Cache le bouton s'il dépasse */
+        .crisp-client .cc-1qbp0[style*="left"] {
+          display: none !important;
         }
       }
     `;
