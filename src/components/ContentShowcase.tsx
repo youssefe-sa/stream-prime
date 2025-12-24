@@ -64,6 +64,14 @@ const categories = [
     image: contentKids,
     gradient: "from-green-600/80 to-transparent",
   },
+  {
+    id: "music",
+    title: "Music & Entertainment",
+    description: "Music channels & concerts",
+    channels: "800+",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=600&fit=crop",
+    gradient: "from-pink-600/80 to-transparent",
+  },
 ];
 
 const featuredContent = [
