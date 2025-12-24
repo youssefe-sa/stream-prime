@@ -1,4 +1,5 @@
-import { Play } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from 'react';
 import contentSports from "@/assets/content-sports.jpg";
 import contentMovies from "@/assets/content-movies.jpg";
 import contentNews from "@/assets/content-news.jpg";
@@ -83,7 +84,96 @@ const featuredContent = [
   { title: "The Godfather", type: "Movie", rating: "9.2", image: contentNews },
 ];
 
+const popularContent = [
+  { 
+    title: "Squid Game", 
+    type: "Series", 
+    rating: "8.0", 
+    image: contentVod,
+    platform: "Netflix"
+  },
+  { 
+    title: "Wednesday", 
+    type: "Series", 
+    rating: "8.1", 
+    image: contentKids,
+    platform: "Netflix"
+  },
+  { 
+    title: "Top Gun: Maverick", 
+    type: "Movie", 
+    rating: "8.3", 
+    image: contentSports,
+    platform: "Paramount+"
+  },
+  { 
+    title: "The Last of Us", 
+    type: "Series", 
+    rating: "8.8", 
+    image: contentNews,
+    platform: "HBO Max"
+  },
+  { 
+    title: "Barbie", 
+    type: "Movie", 
+    rating: "7.0", 
+    image: contentMovies,
+    platform: "Max"
+  },
+  { 
+    title: "Oppenheimer", 
+    type: "Movie", 
+    rating: "8.4", 
+    image: contentPpv,
+    platform: "Universal"
+  },
+  { 
+    title: "The Bear", 
+    type: "Series", 
+    rating: "8.6", 
+    image: contentLive,
+    platform: "FX/Hulu"
+  },
+  { 
+    title: "Avatar: The Way of Water", 
+    type: "Movie", 
+    rating: "7.6", 
+    image: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&h=600&fit=crop",
+    platform: "Disney+"
+  },
+];
+
 export const ContentShowcase = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === popularContent.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToPrevious = () => {
+    setCurrentIndex(currentIndex === 0 ? popularContent.length - 1 : currentIndex - 1);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex(currentIndex === popularContent.length - 1 ? 0 : currentIndex + 1);
+  };
+
+  // Get 6 items for current slide, wrapping around if needed
+  const getCurrentSlideItems = () => {
+    const items = [];
+    for (let i = 0; i < 6; i++) {
+      const index = (currentIndex + i) % popularContent.length;
+      items.push(popularContent[index]);
+    }
+    return items;
+  };
+
   return (
     <section className="py-24 bg-background">
       <div className="section-container">
@@ -101,7 +191,7 @@ export const ContentShowcase = () => {
         </div>
 
         {/* Category Cards Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
           {categories.map((category) => (
             <div
               key={category.id}
@@ -137,34 +227,68 @@ export const ContentShowcase = () => {
         </div>
 
         {/* Featured Content Row */}
-        <div>
-          <h3 className="text-xl font-semibold text-foreground mb-6">
-            Popular Right Now
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {featuredContent.map((content, index) => (
-              <div
-                key={index}
-                className="group glass-card p-4 hover:border-primary/30 transition-all cursor-pointer"
+        {/* Popular Right Now in USA - Carousel */}
+        <div className="mt-16">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-semibold text-foreground">
+              Popular Right Now
+            </h3>
+            <div className="flex gap-2">
+              <button
+                onClick={goToPrevious}
+                className="p-2 rounded-full bg-background border border-border hover:bg-primary hover:text-primary-foreground transition-colors"
+                aria-label="Previous"
               >
-                <div className="aspect-[2/3] rounded-lg bg-muted mb-3 overflow-hidden relative">
-                  <img 
-                    src={content.image} 
-                    alt={content.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <Play className="absolute inset-0 m-auto w-8 h-8 text-white/60 group-hover:text-white group-hover:scale-110 transition-all" />
-                  <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary/90 text-primary-foreground text-xs font-bold">
-                    ★ {content.rating}
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={goToNext}
+                className="p-2 rounded-full bg-background border border-border hover:bg-primary hover:text-primary-foreground transition-colors"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+          
+          <div className="relative overflow-hidden rounded-xl">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+            >
+              {popularContent.map((content, index) => (
+                <div key={index} className="w-full flex-shrink-0">
+                  <div className="flex gap-4 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 md:gap-4">
+                    {getCurrentSlideItems().map((item, itemIndex) => (
+                      <div
+                        key={itemIndex}
+                        className="group glass-card p-4 hover:border-primary/30 transition-all cursor-pointer flex-shrink-0 w-40 md:w-auto"
+                      >
+                        <div className="aspect-[2/3] rounded-lg bg-muted mb-3 overflow-hidden relative">
+                          <img 
+                            src={item.image} 
+                            alt={item.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                          <Play className="absolute inset-0 m-auto w-8 h-8 text-white/60 group-hover:text-white group-hover:scale-110 transition-all" />
+                          <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary/90 text-primary-foreground text-xs font-bold">
+                            ★ {item.rating}
+                          </div>
+                          <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-background/90 text-foreground text-xs font-medium">
+                            {item.platform}
+                          </div>
+                        </div>
+                        <h4 className="text-sm font-medium text-foreground line-clamp-1">
+                          {item.title}
+                        </h4>
+                        <p className="text-xs text-muted-foreground">{item.type}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <h4 className="text-sm font-medium text-foreground line-clamp-1">
-                  {content.title}
-                </h4>
-                <p className="text-xs text-muted-foreground">{content.type}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
