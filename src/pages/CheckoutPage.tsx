@@ -508,7 +508,7 @@ const CheckoutPage = () => {
                   <span className="text-lg font-bold text-black">StreamMax</span>
                 </a>
                 <span className="text-gray-300">|</span>
-                <h3 className="text-lg font-semibold text-gray-900">Complete Your Payment</h3>
+                <h3 className="text-lg font-semibold text-gray-900 whitespace-nowrap">Complete Your Payment</h3>
               </div>
               <button
                 onClick={closePaymentModal}
