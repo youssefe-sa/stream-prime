@@ -190,10 +190,23 @@
         return;
       }
 
-      socket = io('http://localhost:3001', {
+      // Déterminer l'URL du serveur selon l'environnement
+      const isDevelopment = window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1' ||
+                           window.location.hostname.includes('192.168.');
+      
+      const serverUrl = isDevelopment ? 'http://localhost:3001' : 
+                        window.location.protocol + '//' + window.location.hostname + ':3001';
+
+      console.log(`Connecting to WebSocket server: ${serverUrl}`);
+
+      socket = io(serverUrl, {
         transports: ['websocket', 'polling'],
         timeout: 10000,
-        forceNew: true
+        forceNew: true,
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000
       });
 
       socket.on('connect', () => {

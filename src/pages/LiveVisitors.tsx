@@ -66,10 +66,21 @@ const LiveVisitors = () => {
     setVisitorTracker(tracker);
 
     // Connexion au serveur WebSocket
-    const newSocket = io('http://localhost:3001', {
+    const newSocket = io(() => {
+      // Déterminer l'URL du serveur selon l'environnement
+      const isDevelopment = window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1' ||
+                           window.location.hostname.includes('192.168.');
+      
+      return isDevelopment ? 'http://localhost:3001' : 
+             window.location.protocol + '//' + window.location.hostname + ':3001';
+    }(), {
       transports: ['websocket', 'polling'],
       timeout: 10000,
-      forceNew: true
+      forceNew: true,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000
     });
 
     newSocket.on('connect', () => {

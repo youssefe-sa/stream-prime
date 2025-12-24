@@ -1,16 +1,21 @@
 const express = require('express');
 const http = require('http');
-const socketIo = require('socket.io');
+const { Server } = require("socket.io");
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server, {
+
+// Créer le serveur HTTP
+const server = http.createServer();
+
+// Configuration CORS pour le Socket.IO
+const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:8080", "http://localhost:5173", "http://192.168.1.105:8080"],
-    methods: ["GET", "POST"]
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -342,8 +347,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`🚀 Visitor tracking server running on port ${PORT}`);
-  console.log(`📊 Real-time visitor tracking active`);
-  console.log(`🌐 API available at http://localhost:${PORT}/api`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Visitor tracking server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+console.log(`🌐 API available at http://localhost:${PORT}/api`);
