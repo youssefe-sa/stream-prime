@@ -98,7 +98,7 @@ export const Header = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-3 text-foreground bg-background/80 hover:bg-background border border-border/50 backdrop-blur-sm rounded-lg transition-all duration-200 shadow-sm" 
+          className="md:hidden p-3 bg-primary text-primary-foreground hover:bg-primary/90 border-2 border-primary/30 rounded-lg transition-all duration-200 shadow-lg" 
           onClick={(e) => {
             e.preventDefault();
             setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -110,9 +110,9 @@ export const Header = () => {
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
-            <X className="w-6 h-6 text-foreground" />
+            <X className="w-6 h-6 text-primary-foreground" />
           ) : (
-            <Menu className="w-6 h-6 text-foreground" />
+            <Menu className="w-6 h-6 text-primary-foreground" />
           )}
         </button>
       </nav>
