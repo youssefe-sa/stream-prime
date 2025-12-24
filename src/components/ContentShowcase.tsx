@@ -145,6 +145,7 @@ const popularContent = [
 
 export const ContentShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -156,8 +157,18 @@ export const ContentShowcase = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const getCurrentSlideItems = () => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    if (isMobile) {
       // Mobile: return 2 items for the carousel
       const items = [];
       for (let i = 0; i < 2; i++) {
@@ -177,7 +188,7 @@ export const ContentShowcase = () => {
   };
 
   const goToPrevious = () => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    if (isMobile) {
       // Mobile: decrement by 2
       setCurrentIndex(currentIndex === 0 || currentIndex === 1 ? 
         popularContent.length - (2 - currentIndex) : currentIndex - 2);
@@ -188,7 +199,7 @@ export const ContentShowcase = () => {
   };
 
   const goToNext = () => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    if (isMobile) {
       // Mobile: increment by 2
       setCurrentIndex((currentIndex + 2) % popularContent.length);
     } else {
@@ -277,7 +288,7 @@ export const ContentShowcase = () => {
           <div className="relative overflow-hidden rounded-xl">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (window.innerWidth < 768 ? 50 : 16.66)}%)` }}
+              style={{ transform: `translateX(-${currentIndex * (isMobile ? 50 : 16.66)}%)` }}
             >
               {popularContent.map((content, index) => (
                 <div key={index} className="w-full flex-shrink-0">
