@@ -42,8 +42,9 @@ export const PricingMatrix = ({ onSelectPlan }: PricingMatrixProps) => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Choose Your Plan
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto whitespace-nowrap">
-            Select your subscription duration and number of devices. Longer plans = bigger savings.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Select your subscription duration and number of devices.<br />
+            Longer plans = bigger savings.
           </p>
         </div>
 

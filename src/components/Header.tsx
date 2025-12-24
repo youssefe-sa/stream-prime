@@ -62,8 +62,8 @@ export const Header = () => {
     }
     return location.pathname === href;
   };
-  return <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : "bg-transparent"}`}>
-      <nav className="section-container flex items-center justify-between h-16 md:h-20">
+  return <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-hidden ${isScrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : "bg-transparent"}`}>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center transition-transform group-hover:scale-110">
@@ -118,8 +118,8 @@ export const Header = () => {
       </nav>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border animate-fade-in">
-          <div className="section-container py-4 flex flex-col gap-4">
+      {isMobileMenuOpen && <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border animate-fade-in overflow-x-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-4">
             {navLinks.map(link => (
               <a 
                 key={link.label} 

@@ -164,14 +164,30 @@ export const ContentShowcase = () => {
     setCurrentIndex(currentIndex === popularContent.length - 1 ? 0 : currentIndex + 1);
   };
 
-  // Get 6 items for current slide, wrapping around if needed
   const getCurrentSlideItems = () => {
+    const isMobile = window.innerWidth < 768;
+    const itemsPerSlide = isMobile ? 3 : 6;
     const items = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < itemsPerSlide; i++) {
       const index = (currentIndex + i) % popularContent.length;
       items.push(popularContent[index]);
     }
     return items;
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Force re-render on window resize
+      setCurrentIndex(0);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getTransformPercentage = () => {
+    const isMobile = window.innerWidth < 768;
+    return isMobile ? (currentIndex * 33.33) : (currentIndex * 16.66);
   };
 
   return (
@@ -226,8 +242,7 @@ export const ContentShowcase = () => {
           ))}
         </div>
 
-        {/* Featured Content Row */}
-        {/* Popular Right Now in USA - Carousel */}
+        {/* Popular Right Now - Carousel */}
         <div className="mt-16">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-semibold text-foreground">
@@ -254,37 +269,39 @@ export const ContentShowcase = () => {
           <div className="relative overflow-hidden rounded-xl">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+              style={{ transform: `translateX(-${getTransformPercentage()}%)` }}
             >
               {popularContent.map((content, index) => (
                 <div key={index} className="w-full flex-shrink-0">
-                  <div className="flex gap-4 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 md:gap-4">
-                    {getCurrentSlideItems().map((item, itemIndex) => (
-                      <div
-                        key={itemIndex}
-                        className="group glass-card p-4 hover:border-primary/30 transition-all cursor-pointer flex-shrink-0 w-40 md:w-auto"
-                      >
-                        <div className="aspect-[2/3] rounded-lg bg-muted mb-3 overflow-hidden relative">
-                          <img 
-                            src={item.image} 
-                            alt={item.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                          <Play className="absolute inset-0 m-auto w-8 h-8 text-white/60 group-hover:text-white group-hover:scale-110 transition-all" />
-                          <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary/90 text-primary-foreground text-xs font-bold">
-                            ★ {item.rating}
+                  <div className="px-4 md:px-0">
+                    <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                      {getCurrentSlideItems().map((item, itemIndex) => (
+                        <div
+                          key={itemIndex}
+                          className="group glass-card p-4 hover:border-primary/30 transition-all cursor-pointer flex-shrink-0 w-40 md:w-auto"
+                        >
+                          <div className="aspect-[2/3] rounded-lg bg-muted mb-3 overflow-hidden relative">
+                            <img 
+                              src={item.image} 
+                              alt={item.title}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                            <Play className="absolute inset-0 m-auto w-8 h-8 text-white/60 group-hover:text-white group-hover:scale-110 transition-all" />
+                            <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary/90 text-primary-foreground text-xs font-bold">
+                              ★ {item.rating}
+                            </div>
+                            <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-background/90 text-foreground text-xs font-medium">
+                              {item.platform}
+                            </div>
                           </div>
-                          <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-background/90 text-foreground text-xs font-medium">
-                            {item.platform}
-                          </div>
+                          <h4 className="text-sm font-medium text-foreground line-clamp-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-muted-foreground">{item.type}</p>
                         </div>
-                        <h4 className="text-sm font-medium text-foreground line-clamp-1">
-                          {item.title}
-                        </h4>
-                        <p className="text-xs text-muted-foreground">{item.type}</p>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
