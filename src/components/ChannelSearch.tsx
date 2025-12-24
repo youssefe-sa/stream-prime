@@ -79,6 +79,9 @@ const ChannelSearch = () => {
           <p className="text-primary/80 text-sm max-w-2xl mx-auto mt-2">
             VOD included: Latest movies & series on demand, adult content (upon request), and access to popular streaming platforms like Netflix, Apple TV+, Disney+, and more - all in one place!
           </p>
+          <p className="text-muted-foreground text-sm max-w-2xl mx-auto mt-4">
+            Find the complete list of all available channels on our Channels page.
+          </p>
         </div>
         
         <div className="relative max-w-3xl mx-auto">
